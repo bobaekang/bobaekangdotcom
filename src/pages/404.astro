@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const isBlog = Astro.url.pathname.startsWith("/blog");
+---
+
+<BaseLayout title="404">
+  <section class="max-w-screen-md mx-auto">
+    <a
+      href={isBlog ? "/blog" : "/"}
+      class="text-gray-400 hover:text-blue-400 hover:underline"
+      >← {isBlog ? "Blog" : "Home"}</a
+    >
+    <h2 class="font-bold text-3xl">Page not found 😳</h2>
+  </section>
+</BaseLayout>

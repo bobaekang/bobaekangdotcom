@@ -1,0 +1,44 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import BlogPostList from "../../../components/BlogPostList.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  const tagToPosts: Record<string, typeof posts> = {};
+  for (const post of posts)
+    if (post.data.tags)
+      for (const tag of post.data.tags)
+        if (!tagToPosts[tag]) tagToPosts[tag] = [post];
+        else tagToPosts[tag].push(post);
+
+  return Object.entries(tagToPosts).map(([tag, posts]) => ({
+    params: { slug: tag },
+    props: { posts, tag },
+  }));
+}
+type Props = {
+  posts: CollectionEntry<"blog">[];
+  tag: string;
+};
+
+const { posts, tag } = Astro.props;
+---
+
+<BaseLayout title={`Blog #${tag}`}>
+  <div class="grid gap-y-12 max-w-screen-md mx-auto">
+    <section>
+      <a
+        href="/blog/tags"
+        class="text-gray-400 hover:text-blue-400 hover:underline">← All tags</a
+      >
+      <h2 class="font-bold">
+        {posts.length}
+        {posts.length < 2 ? "post" : "posts"} tagged with "{tag}"
+      </h2>
+    </section>
+    <section class="flex flex-grow">
+      <BlogPostList posts={posts} />
+    </section>
+  </div>
+</BaseLayout>

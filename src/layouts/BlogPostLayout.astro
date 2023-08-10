@@ -1,0 +1,86 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon";
+import FormattedDate from "../components/FormattedDate.astro";
+import FormattedTags from "../components/FormattedTags.astro";
+import BaseLayout from "./BaseLayout.astro";
+
+type BlogEntry = CollectionEntry<"blog">;
+type Props = { curr: BlogEntry; prev?: BlogEntry; next?: BlogEntry };
+
+const { curr, prev, next } = Astro.props;
+const { title, description, pubDate, tags } = curr.data;
+
+const proseAnchorClass =
+  "prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline";
+const proseBlockquoteClass =
+  "prose-blockquote:bg-slate-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic before:[&>*]:prose-blockquote:content-none";
+const proseFootnotesClass =
+  "[&>*.footnotes]:mt-12 [&>*.footnotes]:border-t [&>*.footnotes>h2]:hidden [&>*.footnotes]:text-sm";
+
+const footerClass = "font-bold flex justify-between gap-8";
+const footerLinkClass =
+  "flex gap-2 items-center hover:text-blue-400 hover:underline";
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="grid gap-y-4 max-w-screen-md mx-auto">
+    <section>
+      <a href="/blog" class="text-gray-400 hover:text-blue-400 hover:underline"
+        >← Blog</a
+      >
+    </section>
+    <article class="grid gap-y-8">
+      <header>
+        <div class="flex">
+          <FormattedDate date={pubDate} class="text-gray-400" />
+          <FormattedTags tags={tags} />
+        </div>
+        <h1 class="text-3xl font-bold">{title}</h1>
+      </header>
+      <div
+        class:list={[
+          "prose max-w-screen-md",
+          proseAnchorClass,
+          proseBlockquoteClass,
+          proseFootnotesClass,
+        ]}
+      >
+        <slot />
+      </div>
+      <footer class={footerClass}>
+        {
+          prev && (
+            <a href={`/blog/${prev.slug}`} class={footerLinkClass}>
+              <Icon
+                class="inline mt-1"
+                pack="feather"
+                name="chevron-left"
+                width="1.25rem"
+                height="1.25rem"
+              />
+              {prev.data.title}
+            </a>
+          )
+        }
+        {
+          next && (
+            <a
+              href={`/blog/${next.slug}`}
+              class:list={[footerLinkClass, "text-right"]}
+            >
+              {next.data.title}
+              <Icon
+                class="inline mt-1"
+                pack="feather"
+                name="chevron-right"
+                width="1.25rem"
+                height="1.25rem"
+              />
+            </a>
+          )
+        }
+      </footer>
+    </article>
+  </div>
+</BaseLayout>

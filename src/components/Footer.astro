@@ -1,0 +1,47 @@
+---
+import { Icon } from "astro-icon";
+import Link from "./Link.astro";
+
+const links = [
+  {
+    ariaLabel: "See my Github profile",
+    icon: "github",
+    href: "https://github.com/bobaekang",
+  },
+  {
+    ariaLabel: "See my Twitter profile",
+    icon: "twitter",
+    href: "https://twitter.com/bobaekang",
+  },
+  {
+    ariaLabel: "See my LinkedIn profile",
+    icon: "linkedin",
+    href: "https://www.linkedin.com/in/bobaekang",
+  },
+  {
+    ariaLabel: "Send me an email",
+    icon: "mail",
+    href: "mailto:hello@bobaekang.com",
+  },
+];
+---
+
+<footer class="text-gray-400 p-4 text-center text-sm">
+  <div
+    class="flex justify-center gap-2 [&>a]:mb-1 [&>a]:text-inherit hover:[&>a]:text-blue-400"
+  >
+    {
+      links.map((link) => (
+        <Link href={link.href} aria-label={link.ariaLabel}>
+          <Icon
+            pack="feather"
+            name={link.icon}
+            width="1.25rem"
+            height="1.25rem"
+          />
+        </Link>
+      ))
+    }
+  </div>
+  &copy; {new Date().getFullYear()} Bobae Kang. All rights reserved.
+</footer>

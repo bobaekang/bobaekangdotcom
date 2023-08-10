@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const posts = await getCollection("blog");
+const tagToCount: Record<string, number> = {};
+for (const post of posts)
+  if (post.data.tags)
+    for (const tag of post.data.tags)
+      if (!tagToCount[tag]) tagToCount[tag] = 1;
+      else tagToCount[tag]++;
+
+const entries = Object.entries(tagToCount).sort((a, b) => {
+  const tagA = a[0];
+  const tagB = b[0];
+  if (tagA > tagB) return 1;
+  if (tagA < tagB) return -1;
+  return 0;
+});
+---
+
+<BaseLayout title="Blog tags">
+  <div class="grid gap-y-12 max-w-screen-md mx-auto">
+    <section>
+      <a href="/blog" class="text-gray-400 hover:text-blue-400 hover:underline"
+        >← Blog</a
+      >
+      <h2 class="font-bold">All tags</h2>
+    </section>
+    <section class="flex flex-grow">
+      <ul class="grid gap-y-1">
+        {
+          entries.map(([tag, count]) => (
+            <li>
+              <a
+                href={`/blog/tags/${tag}`}
+                class="hover:text-blue-400 hover:underline"
+              >
+                #{tag} ({count})
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

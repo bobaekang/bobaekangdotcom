@@ -1,0 +1,19 @@
+---
+import { SITE_TITLE } from "../consts";
+import HeaderLink from "./HeaderLink.astro";
+---
+
+<header class="max-w-screen-md mx-auto w-full h-[4rem]">
+  <nav class="flex items-baseline gap-12 py-4">
+    <span class="relative">
+      <span
+        class="block absolute -inset-1 -skew-y-3 bg-[#FF240E] h-[1.5rem] my-[.6rem]"
+        aria-hidden="true"></span>
+      <span class="relative text-white font-bold text-xl">{SITE_TITLE}</span>
+    </span>
+    <div class="flex gap-4">
+      <HeaderLink href="/">home</HeaderLink>
+      <HeaderLink href="/blog">blog</HeaderLink>
+    </div>
+  </nav>
+</header>

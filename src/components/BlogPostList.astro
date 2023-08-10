@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { compareBlogEntriesByPubDate } from "../utils";
+import Link from "./Link.astro";
+import FormattedDate from "./FormattedDate.astro";
+import FormattedTags from "./FormattedTags.astro";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+  recentOnly?: boolean;
+}
+
+const { posts, recentOnly } = Astro.props;
+---
+
+<ul class="grid gap-y-6">
+  {
+    posts
+      .sort(compareBlogEntriesByPubDate)
+      .slice(0, recentOnly ? 5 : undefined)
+      .map((post) => (
+        <li class="block">
+          <div class="flex">
+            <FormattedDate date={post.data.pubDate} class="text-gray-400" />
+            <FormattedTags
+              tags={post.data.tags}
+              cutoff={recentOnly ? 2 : undefined}
+            />
+          </div>
+          <a href={`/blog/${post.slug}/`}>
+            <h4 class="font-bold hover:underline hover:text-blue-400">
+              {post.data.title}
+            </h4>
+          </a>
+        </li>
+      ))
+  }
+  {
+    recentOnly && (
+      <li>
+        <Link href="/blog" class="block hover:text-blue-400 hover:underline">
+          Read more...
+        </Link>
+      </li>
+    )
+  }
+</ul>

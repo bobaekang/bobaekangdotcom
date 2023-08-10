@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="#fff">
+  <text x="8">
+    <tspan font-weight="bold" fill="white">b</tspan>
+  </text>
+  <style>
+    svg { background-color: red; }
+    text {
+      dominant-baseline: hanging;
+      font: 32px ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+  </style>
+</svg>

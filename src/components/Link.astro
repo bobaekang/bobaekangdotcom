@@ -1,0 +1,14 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"a">;
+
+const { class: className, ...props } = Astro.props;
+
+if (props.href?.toString().startsWith("http")) {
+  props.target = "_blank";
+  props.rel = "noopener noreferrer";
+}
+---
+
+<a class={className ?? "text-blue-400 hover:underline"} {...props}><slot /></a>

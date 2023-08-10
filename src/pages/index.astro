@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import Link from "../components/Link.astro";
+import BlogPostList from "../components/BlogPostList.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const posts = await getCollection("blog");
+---
+
+<BaseLayout title="Home">
+  <div class="grid gap-y-20 fr-1 max-w-screen-md mx-auto">
+    <section>
+      <h1 class="text-5xl font-bold mb-4">Hi, I'm Bobae</h1>
+      <p class="mb-4">
+        A social scientist turned software engineer. I started out as a
+        researcher and data analyst, and later fell in love with web
+        technologies as well as the art and craft of software development in
+        general.
+      </p>
+      <p class="mb-4">
+        Find me on
+        <Link href="https://github.com/bobaekang">GitHub</Link>,
+        <Link href="https://twitter.com/bobaekang">Twitter</Link>, and
+        <Link href="https://www.linkedin.com/in/bobaekang">LinkedIn</Link>. Or
+        send me an <Link href="mailto:hello@bobaekang.com">email</Link>.
+      </p>
+    </section>
+    <section>
+      <h2 class="text-3xl font-bold mb-4">Recent posts</h2>
+      <BlogPostList posts={posts} recentOnly />
+    </section>
+  </div>
+</BaseLayout>

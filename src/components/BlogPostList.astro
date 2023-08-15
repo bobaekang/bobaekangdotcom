@@ -20,18 +20,16 @@ const { posts, recentOnly } = Astro.props;
       .slice(0, recentOnly ? 5 : undefined)
       .map((post) => (
         <li class="block">
-          <div class="flex">
-            <FormattedDate date={post.data.pubDate} class="text-gray-400" />
-            <FormattedTags
-              tags={post.data.tags}
-              cutoff={recentOnly ? 2 : undefined}
-            />
-          </div>
+          <FormattedDate date={post.data.pubDate} />
           <a href={`/blog/${post.slug}/`}>
-            <h4 class="font-bold hover:underline hover:text-blue-400">
+            <h4 class="text-lg font-bold hover:underline hover:text-blue-400">
               {post.data.title}
             </h4>
           </a>
+          <FormattedTags
+            tags={post.data.tags}
+            cutoff={recentOnly ? 2 : undefined}
+          />
         </li>
       ))
   }

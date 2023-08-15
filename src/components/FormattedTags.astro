@@ -8,7 +8,7 @@ const { tags = [], cutoff } = Astro.props;
 
 {
   tags.length > 0 && (
-    <span class="before:ml-2 before:content-['·'] text-gray-400 flex gap-2">
+    <span class="text-gray-400">
       {tags.slice(0, cutoff).map((tag) => (
         <a
           href={`/blog/tags/${tag}`}

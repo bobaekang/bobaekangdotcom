@@ -15,12 +15,14 @@ const proseAnchorClass =
   "prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline";
 const proseBlockquoteClass =
   "prose-blockquote:bg-slate-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic before:[&>*]:prose-blockquote:content-none";
+const prosePreClass = "prose-pre:whitespace-pre-wrap";
 const proseFootnotesClass =
   "[&>*.footnotes]:mt-12 [&>*.footnotes]:border-t [&>*.footnotes>h2]:hidden [&>*.footnotes]:text-sm";
 
-const footerClass = "font-bold flex justify-between gap-8";
+const footerClass =
+  "text-sm sm:text-base font-bold flex justify-between gap-4 sm:gap-8";
 const footerLinkClass =
-  "flex gap-2 items-center hover:text-blue-400 hover:underline";
+  "flex items-center gap-1 sm:gap-2 hover:text-blue-400 hover:underline";
 ---
 
 <BaseLayout title={title} description={description}>
@@ -32,17 +34,16 @@ const footerLinkClass =
     </section>
     <article class="grid gap-y-8">
       <header>
-        <div class="flex">
-          <FormattedDate date={pubDate} class="text-gray-400" />
-          <FormattedTags tags={tags} />
-        </div>
-        <h1 class="text-3xl font-bold">{title}</h1>
+        <FormattedDate date={pubDate} />
+        <h1 class="text-3xl font-bold pb-4">{title}</h1>
+        <FormattedTags tags={tags} />
       </header>
       <div
         class:list={[
           "prose max-w-screen-md",
           proseAnchorClass,
           proseBlockquoteClass,
+          prosePreClass,
           proseFootnotesClass,
         ]}
       >
@@ -50,17 +51,17 @@ const footerLinkClass =
       </div>
       <footer class={footerClass}>
         {
-          prev && (
+          prev ? (
             <a href={`/blog/${prev.slug}`} class={footerLinkClass}>
               <Icon
-                class="inline mt-1"
+                class="flex-shrink-0 mt-0.5 sm:mt-1 w-auto h-4 sm:h-5"
                 pack="feather"
                 name="chevron-left"
-                width="1.25rem"
-                height="1.25rem"
               />
               {prev.data.title}
             </a>
+          ) : (
+            <span />
           )
         }
         {
@@ -71,11 +72,9 @@ const footerLinkClass =
             >
               {next.data.title}
               <Icon
-                class="inline mt-1"
+                class="flex-shrink-0 mt-0.5 sm:mt-1 w-auto h-4 sm:h-5"
                 pack="feather"
                 name="chevron-right"
-                width="1.25rem"
-                height="1.25rem"
               />
             </a>
           )

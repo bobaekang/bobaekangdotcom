@@ -50,7 +50,7 @@ async function writeBlogPost(res, dirPath, filename) {
   try {
     const text = await res.text();
     const [firstLine, ...lines] = text.split("\n");
-    const pubDateLine = `pubDate: "${pubDate}"`;
+    const pubDateLine = `pubDate: "${pubDate}Z-06:00"`; // use central time zone
     const updatedText = [firstLine, pubDateLine, ...lines].join("\n");
     fs.promises.writeFile(filePath, updatedText);
   } catch (e) {

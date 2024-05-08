@@ -1,26 +1,26 @@
 ---
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 import Link from "./Link.astro";
 
 const links = [
   {
     ariaLabel: "See my Github profile",
-    icon: "github",
+    icon: "feather:github",
     href: "https://github.com/bobaekang",
   },
   {
     ariaLabel: "See my Twitter profile",
-    icon: "twitter",
+    icon: "feather:twitter",
     href: "https://twitter.com/bobaekang",
   },
   {
     ariaLabel: "See my LinkedIn profile",
-    icon: "linkedin",
+    icon: "feather:linkedin",
     href: "https://www.linkedin.com/in/bobaekang",
   },
   {
     ariaLabel: "Send me an email",
-    icon: "mail",
+    icon: "feather:mail",
     href: "mailto:hello@bobaekang.com",
   },
 ];
@@ -33,12 +33,7 @@ const links = [
     {
       links.map((link) => (
         <Link href={link.href} aria-label={link.ariaLabel}>
-          <Icon
-            pack="feather"
-            name={link.icon}
-            width="1.25rem"
-            height="1.25rem"
-          />
+          <Icon name={link.icon} width={20} height={20}/>
         </Link>
       ))
     }

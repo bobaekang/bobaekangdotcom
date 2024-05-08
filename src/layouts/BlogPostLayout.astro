@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 import FormattedDate from "../components/FormattedDate.astro";
 import FormattedTags from "../components/FormattedTags.astro";
 import BaseLayout from "./BaseLayout.astro";
@@ -55,8 +55,7 @@ const footerLinkClass =
             <a href={`/blog/${prev.slug}`} class={footerLinkClass}>
               <Icon
                 class="flex-shrink-0 mt-0.5 sm:mt-1 w-auto h-4 sm:h-5"
-                pack="feather"
-                name="chevron-left"
+                name="feather:chevron-left"
               />
               {prev.data.title}
             </a>
@@ -73,8 +72,7 @@ const footerLinkClass =
               {next.data.title}
               <Icon
                 class="flex-shrink-0 mt-0.5 sm:mt-1 w-auto h-4 sm:h-5"
-                pack="feather"
-                name="chevron-right"
+                name="feather:chevron-right"
               />
             </a>
           )

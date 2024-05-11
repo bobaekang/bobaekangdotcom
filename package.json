@@ -12,15 +12,15 @@
     "fetch-blog-source": "node ./fetchBlogSource.js"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.1.1",
+    "@astrojs/mdx": "^3.0.0",
     "@astrojs/rss": "^4.0.5",
-    "@astrojs/sitemap": "^3.0.5",
+    "@astrojs/sitemap": "^3.1.4",
     "@astrojs/tailwind": "^5.1.0",
     "@iconify-json/feather": "^1.1.8",
     "@tailwindcss/typography": "^0.5.10",
-    "astro": "^4.4.0",
+    "astro": "^4.8.2",
     "astro-icon": "^1.1.0",
-    "dotenv": "^16.3.1",
-    "tailwindcss": "^3.3.3"
+    "dotenv": "^16.4.5",
+    "tailwindcss": "^3.4.3"
   }
 }

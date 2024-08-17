@@ -26,13 +26,13 @@ const { posts, tag } = Astro.props;
 ---
 
 <BaseLayout title={`Blog #${tag}`}>
-  <div class="grid gap-y-12 max-w-screen-md mx-auto">
+  <div class="grid gap-y-4 max-w-screen-md mx-auto">
     <section>
       <a
         href="/blog/tags"
         class="text-gray-400 hover:text-blue-400 hover:underline">← All tags</a
       >
-      <h2 class="font-bold">
+      <h2>
         {posts.length}
         {posts.length < 2 ? "post" : "posts"} tagged with "{tag}"
       </h2>

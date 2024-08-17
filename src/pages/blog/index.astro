@@ -7,12 +7,12 @@ const posts = await getCollection("blog");
 ---
 
 <BaseLayout title="Blog">
-  <div class="grid gap-y-12 max-w-screen-md mx-auto">
+  <div class="grid gap-y-4 max-w-screen-md mx-auto">
     <section>
       <a href="/" class="text-gray-400 hover:text-blue-400 hover:underline"
         >← Home</a
       >
-      <h2 class="font-bold">{posts.length} posts</h2>
+      <h2>{posts.length} posts</h2>
     </section>
     <section class="flex flex-grow">
       <BlogPostList posts={posts} />

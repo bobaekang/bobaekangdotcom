@@ -11,7 +11,7 @@ const { tags = [], cutoff } = Astro.props;
     <span class="text-gray-400">
       {tags.slice(0, cutoff).map((tag) => (
         <a
-          href={`/blog/tags/${tag}`}
+          href={`/blog/tags/${tag}/`}
           class="hover:text-blue-400 hover:underline"
         >
           #{tag}

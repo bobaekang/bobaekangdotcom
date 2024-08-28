@@ -7,7 +7,7 @@ const isBlog = Astro.url.pathname.startsWith("/blog");
 <BaseLayout title="404">
   <section class="max-w-screen-md mx-auto">
     <a
-      href={isBlog ? "/blog" : "/"}
+      href={isBlog ? "/blog/" : "/"}
       class="text-gray-400 hover:text-blue-400 hover:underline"
       >← {isBlog ? "Blog" : "Home"}</a
     >

@@ -1,9 +1,9 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { compareBlogEntriesByPubDate } from "../utils";
-import Link from "./Link.astro";
 import FormattedDate from "./FormattedDate.astro";
 import FormattedTags from "./FormattedTags.astro";
+import Link from "./Link.astro";
 
 interface Props {
   posts: CollectionEntry<"blog">[];
@@ -13,23 +13,27 @@ interface Props {
 const { posts, recentOnly } = Astro.props;
 ---
 
-<ul class="grid gap-y-4 ">
+<ul class="grid gap-y-4 w-full">
   {
     posts
       .sort(compareBlogEntriesByPubDate)
       .slice(0, recentOnly ? 3 : undefined)
       .map((post) => (
         <li class="block">
-          <FormattedDate date={post.data.pubDate} />
           <a href={`/blog/${post.slug}/`}>
             <h4 class="font-bold hover:underline hover:text-blue-400">
               {post.data.title}
             </h4>
           </a>
-          <FormattedTags
-            tags={post.data.tags}
-            cutoff={recentOnly ? 2 : undefined}
-          />
+          <div>
+            <FormattedDate date={post.data.pubDate} />
+          </div>
+          <div>
+            <FormattedTags
+              tags={post.data.tags}
+              cutoff={recentOnly ? 2 : undefined}
+            />
+          </div>
         </li>
       ))
   }

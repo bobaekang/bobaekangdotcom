@@ -1,28 +1,37 @@
 ---
-import { Icon } from "astro-icon/components";
-import type { CollectionEntry } from "astro:content";
-import FormattedDate from "../components/FormattedDate.astro";
-import FormattedTags from "../components/FormattedTags.astro";
-import BaseLayout from "./BaseLayout.astro";
+import { Icon } from 'astro-icon/components'
+import type { CollectionEntry } from 'astro:content'
+import FormattedDate from '../components/FormattedDate.astro'
+import FormattedTags from '../components/FormattedTags.astro'
+import BaseLayout from './BaseLayout.astro'
 
-type BlogEntry = CollectionEntry<"blog">;
-type Props = { curr: BlogEntry; prev?: BlogEntry; next?: BlogEntry };
+type BlogEntry = CollectionEntry<'blog'>
+type Props = { curr: BlogEntry; prev?: BlogEntry; next?: BlogEntry }
 
-const { curr, prev, next } = Astro.props;
-const { title, description, pubDate, tags } = curr.data;
+const { curr, prev, next } = Astro.props
+const { title, description, pubDate, tags } = curr.data
 
-const proseAnchorClass =
-  "prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline";
+const proseBaseClass =
+  'max-w-[80ch] text-base/7 text-gray-700 [&_*]:my-5 [&>*:first-child]:mt-0 [&>*:last-child]:mb-0'
+const proseAnchorClass = '[&_a]:text-blue-400 [&_a]:hover:underline'
 const proseBlockquoteClass =
-  "prose-blockquote:bg-slate-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:not-italic before:[&>*]:prose-blockquote:content-none";
-const prosePreClass = "prose-pre:whitespace-pre-wrap";
+  '[&_blockquote]:bg-slate-50 [&_blockquote]:px-4 [&_blockquote]:py-2 [&_blockquote]:border-l-4 [&_blockquote]:border-gray-200'
+const proseCodeClass =
+  '[&_code]:text-sm [&_code]:bg-gray-200 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded-md [&_pre_code]:bg-inherit [&_pre_code]:p-0 [&_pre_code]:rounded-none'
+const proseHeadingClass =
+  '[&_h2,&_h3]:font-bold [&_h2]:text-2xl [&_h2]:mt-10 [&_h3]:text-xl'
+const proseListClass =
+  '[&_ol,&_ul]:pl-6 [&_ol]:list-decimal [&_ul]:list-disc [&_li]:my-1 [&_li]:pl-2'
+const prosePreClass =
+  '[&_pre]:whitespace-pre-wrap [&_pre]:px-4 [&_pre]:py-2 [&_pre]:rounded-lg [&_pre]:text-sm/6 [&_pre]:bg-slate-50'
 const proseFootnotesClass =
-  "[&>*.footnotes]:mt-12 [&>*.footnotes]:border-t [&>*.footnotes>h2]:hidden [&>*.footnotes]:text-sm";
+  '[&>*.footnotes]:mt-10 [&>*.footnotes]:border-t [&>*.footnotes]:border-gray-200 [&>*.footnotes]:text-sm [&>*.footnotes_*]:my-3 [&>*.footnotes>h2]:hidden'
+const proseMiscClass = '[&_summary,&_details]:m-0'
 
 const footerClass =
-  "text-sm sm:text-base font-bold flex justify-between gap-4 sm:gap-8";
+  'text-sm sm:text-base font-bold flex justify-between gap-4 sm:gap-8'
 const footerLinkClass =
-  "flex items-center gap-1 sm:gap-2 hover:text-blue-400 hover:underline";
+  'flex items-center gap-1 sm:gap-2 hover:text-blue-400 hover:underline'
 ---
 
 <BaseLayout title={title} description={description}>
@@ -44,11 +53,15 @@ const footerLinkClass =
       </header>
       <div
         class:list={[
-          "prose max-w-[80ch]",
+          proseBaseClass,
           proseAnchorClass,
           proseBlockquoteClass,
+          proseCodeClass,
+          proseHeadingClass,
+          proseListClass,
           prosePreClass,
           proseFootnotesClass,
+          proseMiscClass,
         ]}
       >
         <slot />
@@ -71,7 +84,7 @@ const footerLinkClass =
           next && (
             <a
               href={`/blog/${next.slug}/`}
-              class:list={[footerLinkClass, "text-right"]}
+              class:list={[footerLinkClass, 'text-right']}
             >
               {next.data.title}
               <Icon

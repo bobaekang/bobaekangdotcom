@@ -1,19 +1,19 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes } from 'astro/types'
 
-type Props = HTMLAttributes<"a">;
+type Props = HTMLAttributes<'a'>
 
-const { href, ...props } = Astro.props;
+const { href, ...props } = Astro.props
 
-const { pathname } = Astro.url;
-const isActive = String(href).split("/")[1] === pathname.split("/")[1];
-const activeClass = "border-b-2 border-black";
+const { pathname } = Astro.url
+const isActive = String(href).split('/')[1] === pathname.split('/')[1]
+const activeClass = 'border-b-2 border-black dark:border-white'
 ---
 
 <a
   href={href}
   class:list={[
-    "pb-1 hover:border-b-2 hover:border-black",
+    'pb-1 hover:border-b-2 hover:border-black dark:hover:border-white',
     isActive && activeClass,
   ]}
   {...props}

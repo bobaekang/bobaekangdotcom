@@ -9,7 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "fetch-blog-source": "node ./fetchBlogSource.js"
+    "fetch-blog-source": "node --env-file=.env ./fetchBlogSource.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -20,7 +20,6 @@
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.17.2",
     "astro-icon": "^1.1.5",
-    "dotenv": "^16.6.1",
     "rehype-slug": "^6.0.0",
     "tailwindcss": "^4.1.16"
   },

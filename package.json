@@ -9,7 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "fetch-blog-source": "node --env-file=.env ./fetchBlogSource.js"
+    "fetch-blog-source": "node --env-file-if-exists=.env ./fetchBlogSource.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",

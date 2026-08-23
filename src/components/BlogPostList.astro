@@ -20,7 +20,7 @@ const { posts, recentOnly } = Astro.props;
       .slice(0, recentOnly ? 3 : undefined)
       .map((post) => (
         <li class="block">
-          <a href={`/blog/${post.slug}/`}>
+          <a href={`/blog/${post.id}/`}>
             <h4 class="font-bold hover:underline hover:text-blue-400">
               {post.data.title}
             </h4>
